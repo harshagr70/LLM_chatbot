@@ -1,80 +1,86 @@
-# LLM powered chatbot
-
-This is a full-stack web application integrating **FastAPI** as the backend and a **React** frontend, with **Neo4j** as the database . 
-
-Ensure you have the following installed before proceeding:  
-
-- **Python 3.8+**  
-- **FastAPI** (Backend framework)  
-- **Node.js 16+** (For frontend)  
-- **Neo4j** (Graph database)  
-- **Docker** (Optional, for Neo4j)  
-- **Git** (For version control)  
-
----
-
-```sh
-
+# Cloning the Repository
+Clone the project repository and navigate to the backend folder:
+```
 git clone <your-repository-url>
 cd <your-project-folder>/backend
+```
 
-## create new virtual enviroment 
+# Setting Up a Virtual Environment
+Create and activate a virtual environment:
+- **macOS/Linux:**
+  ```
+  python -m venv venv
+  source venv/bin/activate
+  ```
+- **Windows:**
+  ```
+  python -m venv venv
+  venv\Scripts\activate
+  ```
 
-python -m venv venv
-source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate      # Windows
-
-#install dependencies 
-
+# Installing Dependencies
+Install the required dependencies:
+```
 pip install -r requirements.txt
+```
 
-#configure enviroment variables
-
+# Configuring Environment Variables
+Ensure the following environment variables are set:
+```
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=yourpassword
 ALLOWED_ORIGIN=http://localhost:5173
+```
 
-##intsall Ollama locally 
-https://ollama.com/download/mac
+# Installing Ollama Locally
+Download and install Ollama:
+[Ollama Download for macOS](https://ollama.com/download/mac)
 
-## run Ollama instance 
+# Running Ollama Instance
+Run Ollama with the following command:
+```
+ollama run llama 3.2
+```
 
-ollama run llama 3.2 
+# Setting Up Sample Data in Neo4j
+Run the script located at `/backend/neo4j_query.txt` to generate sample data.
 
-## neo4j sample data setup 
+# Running the Backend Server
+Ensure that the Neo4j instance is running, then start the backend server:
+```
+python backend.py
+```
+The API endpoint will be available at:
+[http://localhost:8000](http://localhost:8000)
 
-run the script from - /backend/neo4j_query.txt  to generate the sample data 
+---
 
-## run the backend server  (note - make sure neo4j instance is live and running )
+# Frontend Setup
 
-python backend.py 
-
-api end point will be now available at - http://localhost:8000
-
-
-
-##FRONT_END setup 
-
-##navigate to Frontend folder
-
+## Navigating to the Frontend Folder
+Move to the frontend directory:
+```
 cd ../frontend
+```
 
-##install dependencies 
+## Installing Dependencies
+Install the frontend dependencies:
+```
+npm install
+```
 
-npm install 
+## Starting the Frontend Server
+Run the frontend development server:
+```
+npm run dev
+```
+The interface will be available at:
+[http://localhost:5173](http://localhost:5173)
 
-## start the frontend server 
+---
 
-npm run dev 
-
-## Interface @ 
-http://localhost:5173
-
-
-## **note  (!! important )
-
-> **Note:** This bot is designed to generate Cypher queries
-based on the predefined database schema. For best results,
-ask questions relevant to the provided schema. If the schema changes,
-the bot must be retrained with new examples to maintain accuracy.
+## **Important Note**
+> This bot generates Cypher queries based on the predefined database schema. 
+> For best results, ensure that queries align with the existing schema. 
+> If the schema is updated, the bot must be retrained with new examples for accuracy.
