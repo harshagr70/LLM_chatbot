@@ -10,14 +10,10 @@ import os
 
 load_dotenv()
 # ------------------------------------------------------------------------------
-# A simple response wrapper so that the response has a .content attribute.
-# ------------------------------------------------------------------------------
 class LLMResponse:
     def __init__(self, content: str):
         self.content = content
 
-# ------------------------------------------------------------------------------
-# Create a local Llama‑3 LLM wrapper that mimics the expected interface.
 # ------------------------------------------------------------------------------
 class LocalLlamaLLM:
     def __init__(self, model="llama3", temperature=0):
@@ -34,8 +30,6 @@ class LocalLlamaLLM:
     def predict(self, prompt: str, *args, **kwargs) -> LLMResponse:
         return self.__call__(prompt, *args, **kwargs)
 
-# ------------------------------------------------------------------------------
-# 1. Connect to the Neo4j demo database.
 # ------------------------------------------------------------------------------
 
 def get_env_var(var_name: str):
@@ -54,8 +48,6 @@ AUTH = (USER, PASSWORD)
 driver = GraphDatabase.driver(URI, auth=AUTH)
 
 # ------------------------------------------------------------------------------
-# 2. Define the Neo4j schema.
-# ------------------------------------------------------------------------------
 neo4j_schema = """
 Node properties:
 Movie {title: STRING, released: INTEGER, genre: STRING}
@@ -67,8 +59,6 @@ Relationships:
 (:Director)-[:DIRECTED]->(:Movie)
 """
 
-# ------------------------------------------------------------------------------
-# 3. Example query pairs.
 # ------------------------------------------------------------------------------
 examples = [
     "USER INPUT: 'Which actors starred in the Matrix?' QUERY: MATCH (p:Person)-[:ACTED_IN]->(m:Movie) WHERE m.title = 'The Matrix' RETURN p.name"
@@ -96,15 +86,11 @@ examples = [
 ]
 
 # ------------------------------------------------------------------------------
-# 4. Initialize retriever & GraphRAG
-# ------------------------------------------------------------------------------
 local_llm_for_retriever = LocalLlamaLLM(model="llama3.2")
 retriever = Text2CypherRetriever(driver=driver, llm=local_llm_for_retriever, neo4j_schema=neo4j_schema, examples=examples)
 local_llm_for_generation = LocalLlamaLLM(model="llama3.2")
 rag = GraphRAG(retriever=retriever, llm=local_llm_for_generation)
 
-# ------------------------------------------------------------------------------
-# FastAPI app
 # ------------------------------------------------------------------------------
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
@@ -137,9 +123,6 @@ def get_answer(request: QueryRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-# ------------------------------------------------------------------------------
-# Run FastAPI app
 # ------------------------------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
