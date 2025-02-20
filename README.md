@@ -74,4 +74,7 @@ http://localhost:5173
 
 ## **note  (!! important )
 
-> **Note:** This bot is designed to generate Cypher queries based on the predefined database schema. For best results, ask questions relevant to the provided schema. If the schema changes, the bot must be retrained with new examples to maintain accuracy.
+> **Note:** This bot is designed to generate Cypher queries
+based on the predefined database schema. For best results,
+ask questions relevant to the provided schema. If the schema changes,
+the bot must be retrained with new examples to maintain accuracy.
