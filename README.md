@@ -13,10 +13,8 @@ Ensure you have the following installed before proceeding:
 
 ---
 
-## 🛠️ Backend Setup  
-
-## Clone the Repository  
 ```sh
+
 git clone <your-repository-url>
 cd <your-project-folder>/backend
 
