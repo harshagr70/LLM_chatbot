@@ -26,7 +26,7 @@ const Chatbot = () => {
       const data = await response.json();
       let answer = data.final_answer || "No response";
 
-      // Extract text inside <Name> tags and join them
+      
       const matches = answer.match(/<Name>(.*?)<\/Name>/g);
       if (matches) {
         answer = matches.map((match) => match.replace(/<\/?Name>/g, "")).join(", ");
@@ -46,15 +46,15 @@ const Chatbot = () => {
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-black">
-      {/*  Full-page Background Glow Animation */}
+      
       <div className="absolute inset-0">
-        {/* Main glow */}
+        
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-[180px] opacity-50 animate-pulse"></div>
-        {/* Subtle secondary glow */}
+        
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 via-blue-600 to-purple-700 blur-[250px] opacity-30"></div>
       </div>
 
-      {/*  Chatbot Heading */}
+      
       <motion.h1 
         className="absolute top-5 text-white text-3xl font-bold tracking-wider"
         initial={{ opacity: 0, y: -20 }}
@@ -64,10 +64,10 @@ const Chatbot = () => {
         Chatbot
       </motion.h1>
 
-      {/*  Chatbox Container */}
+      
       <div className="relative w-[80vw] md:w-[60vw] lg:w-[50vw] h-[80vh] bg-gray-900 text-white rounded-lg shadow-xl overflow-hidden p-5 backdrop-blur-md border border-gray-700">
         
-        {/*  Messages Container */}
+        
         <div className="h-[85%] overflow-y-auto space-y-3 p-2">
           {messages.map((msg, index) => (
             <motion.div 
@@ -81,7 +81,7 @@ const Chatbot = () => {
             </motion.div>
           ))}
           
-          {/*  Typing Indicator (NEW) */}
+          
           {loading && (
             <motion.div 
               className="flex space-x-1"
@@ -97,7 +97,7 @@ const Chatbot = () => {
           <div ref={chatEndRef} />
         </div>
 
-        {/*  Input Box Section */}
+       
         <div className="absolute bottom-3 left-3 right-3 flex items-center space-x-2">
           <input
             type="text"
@@ -108,7 +108,7 @@ const Chatbot = () => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           />
 
-          {/* ✉️ Send Button with Animation */}
+          
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
